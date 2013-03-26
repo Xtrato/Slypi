@@ -7,4 +7,11 @@ This has been written to interface with the 16x2 LCD + Keypad that connects to t
 
 Current ideas:
 
-<li>Passive sniffer between two devices. As described here: http://jamesdotcom.com/?p=400
+Passive sniffer between two devices. As described here: http://jamesdotcom.com/?p=400
+Mass network printer
+ARP Cache Spoofing
+Reverse SSH Tunnel
+Denial of service with Deauth Flooding
+Upside-Down-Tenet (Maybe something like http://www.ex-parrot.com/pete/upside-down-ternet.html)
+Automatic Nmap scan and log file upload.
+
