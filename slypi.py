@@ -9,6 +9,9 @@ from datetime import datetime # Used the genreate the filename used in the packe
 # Initialize the LCD plate.  Should auto-detect correct I2C bus.  If not,
 # pass '0' for early 256 MB Model B boards or '1' for all later versions
 lcd = Adafruit_CharLCDPlate(busnum = 0)
+#Change thease values so that the dumped file is uploaded to your dropbox account.
+dropbox_email = "ENTER HERE YOUR DROPBOX EMAIL"
+dropbox_password = "ENTER HERE YOUR DROPBOX PASSWORD"
 
 # The following are the modules which can be added the SlyPi Device.
 # To add the module simply define the function below and then add the module name and function name to the modules dictonary.
@@ -17,9 +20,6 @@ def inlineSniffer():
     print "Inline Sniffer"
     #Counts the number of files that have been dumped
     count = 0 
-    #Change thease values so that the dumped file is uploaded to your dropbox account.
-    dropbox_email = "ENTER HERE YOUR DROPBOX EMAIL"
-    dropbox_password = "ENTER HERE YOUR DROPBOX PASSWORD"
     #the following 7 lines setup the bridge between the two ethernet ports.
     os.system("ifconfig eth0 0.0.0.0")
     os.system("ifconfig eth1 0.0.0.0")
@@ -60,10 +60,18 @@ def upsidedown():
     
 def nmapScanUpload():
     print 'Nmap Scan & Upload'
-    nmapScan = Popen('nmap 192.168.1.0/24', shell=True, stdout=PIPE,stderr=PIPE)
-    output, error = p.communicate()
-    print 'THE OUTPUT'
-    print output
+    nmapScan = subprocess.Popen('nmap 192.168.1.6 -oN nmapoutput.txt', shell=True)
+    lcd.backlight(lcd.GREEN)
+    lcd.message("Running\nNmap Scan")
+    nmapScan.communicate()
+    lcd.message("Scan\nComplete")
+    sleep(1)
+    lcd.clear()
+    lcd.message("Uploading\nFile")
+    upload_file('nmapoutput.txt',"/",'nmapoutput.txt', dropbox_email,dropbox_password)
+    lcd.clear()
+    lcd.message("Upload\nSuccessful")
+    sleep(1)
     
 def dhcpDiscover():
     print 'DHCP Discovery'
