@@ -59,10 +59,17 @@ def upsidedown():
     print 'Upside Down internet'
     
 def nmapScanUpload():
-    print 'Nmap Scan & Upload'  
+    print 'Nmap Scan & Upload'
+    nmapScan = Popen('nmap 192.168.1.0/24', shell=True, stdout=PIPE,stderr=PIPE)
+    output, error = p.communicate()
+    print 'THE OUTPUT'
+    print output
+    
+def dhcpDiscover():
+    print 'DHCP Discovery'
 
 #Contains all modules which can be run on the device. The key is the displayed name on the LCD and the value is the function name
-modules = {'Inline Ethernet\nSniffer': 'inlineSniffer', 'Mass Network\nPrinter': 'printer', 'ARP Cache\nSpoofing': 'aprSpoof', 'Reverse SSH\nTunnel': 'reverseSSH', 'Deauth\nFlooding': 'deauthFlood', 'Upside-Down\nInternet': 'upsidedown', 'NMAP Scan\nand Upload': 'nmapScanUpload'}
+modules = {'Inline Ethernet\nSniffer': 'inlineSniffer', 'Mass Network\nPrinter': 'printer', 'ARP Cache\nSpoofing': 'aprSpoof', 'Reverse SSH\nTunnel': 'reverseSSH', 'Deauth\nFlooding': 'deauthFlood', 'Upside-Down\nInternet': 'upsidedown', 'NMAP Scan\nand Upload': 'nmapScanUpload', 'DHCP\nDiscovery': 'dhcpDiscover'}
 displayText = modules.keys()
 # Clears the display
 lcd.clear()

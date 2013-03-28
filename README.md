@@ -21,3 +21,5 @@ This has been written to interface with the 16x2 LCD + Keypad that connects to t
 
 -Automatic Nmap scan and log file upload.
 
+-DHCP discovery
+
