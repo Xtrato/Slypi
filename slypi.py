@@ -12,7 +12,7 @@ from datetime import datetime # Used the genreate the filename used in the packe
 # pass '0' for early 256 MB Model B boards or '1' for all later versions
 lcd = Adafruit_CharLCDPlate(busnum = 0)
 #Change thease values so that the dumped file is uploaded to your dropbox account.
-dropbox_email = ""
+dropbox_email = "a"
 dropbox_password = ""
 
 # The following are the modules which can be added the SlyPi Device.
