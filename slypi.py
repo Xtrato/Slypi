@@ -37,6 +37,7 @@ def reverseSSH():
     #Sets a reverse shell pointing to your IP using port 2600
     reverseShell = subprocess.Popen('ssh -R ' + connectingClientIP + ':2600:127.0.0.1:4444 pi@' + connectingClientIP, shell=True, stderr=PIPE)
     error = reverseShell.communicate()
+    print error
     errorCheck(error, 'Cannot start\n Reverse SSH', 'SSH Started\n' + connectingClientIP)
 
 def inlineSniffer():
@@ -129,6 +130,7 @@ def nmapScanUpload():
     lcd.message("Uploading\nFile")
     #Starts FTP session
     ftpSession = ftplib.FTP(ftp_server, ftp_username, ftp_password)
+    ftpSession.cwd('nmap')
     #Opens file to be uploaded
     file = open('nmapoutput.txt', 'rb')
     #Uploads the File
@@ -166,7 +168,9 @@ def connectivityTest():
     else:
         privateIP = getPrivateIP()
         publicIP = getPublicIP()
-        lcd.backlight(lcd.GREEN)
+        lcd.backlight(lcd.YELLOW)
+        print privateIP
+        print publicIP
         #Displays the public and private IP addresses on the LED screen.
         lcd.message(privateIP + '\n' + publicIP)
         sleep(3)
@@ -193,7 +197,7 @@ def errorCheck(error, failedMessage, succeedMessage):
     error = 0
 
 def getPublicIP():
-    publicIPUrl = urllib.urlopen("http://ipecho.net/plain")
+    publicIPUrl = urllib.urlopen("http://my-ip.heroku.com/")
     return publicIPUrl.read()
 
 def getPrivateIP():
